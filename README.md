@@ -1,4 +1,4 @@
-# loft-taxu
+# loft-taxi
 Учебное приложение в рамках курса LoftSchool "React.js Разработка веб-приложений"
 
 # Getting Started with Create React App
