@@ -1,42 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import SidePanel from './components/SidePanel';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import Header from './components/Header';
-import Map from './pages/Map';
-import Profile from './pages/Profile'; 
+import SidePanel from './pages/SidePanel/SidePanel';
+import Header from './components/Header/Header';
+import Map from './pages/Map/Map';
+import Profile from './pages/Profile/Profile';
+import { widthAuth } from './components/AuthContext/AuthContext';
+import PropTypes from "prop-types";
 
-const pages = {
-  login: <SidePanel />,
-  signup: <SidePanel />,
-  map: <Map />,
-  profile: <Profile />  
-};
+const PAGES = {
+  'sidepanel': (props) => <SidePanel {...props} />,
+  'map': (props) => <Map {...props}/>,
+  'profile': (props) => <Profile {...props} />  
+}
 
-class App extends React.Component {
-  constructor () {
-    super();
-    this.state = { page: 'login' };
-  }
-    
+class App extends React.Component { 
+  static propTypes = {
+    isLoggedIn: PropTypes.bool
+  } 
+
+  state = { page: 'sidepanel'}
+
   goToPage = (page) => {
+    console.log('App', this.props.isLoggedIn);
+
+    if (!this.props.isLoggedIn) {
+      this.setState( {page: 'sidepanel'} );
+      return
+    }
+    if (!page) {
+      this.setState( {page: 'map'} );
+      return
+    }
     this.setState({ page });
   };
 
   render() {
-    return (
-      <React.Fragment>
-        <main>
-          { pages[ this.state.page ] }
-          { this.state.page === 'login' ? <LogIn goToPage = { this.goToPage }/> : null }
-          { this.state.page === 'signup' ? <SignUp goToPage = { this.goToPage }/> : null }
-          { this.state.page === 'map' ? (<Header goToPage = { this.goToPage }/>) : null }
-          { this.state.page === 'profile' ? (<Header goToPage = { this.goToPage }/>) : null }          
-        </main>
-      </React.Fragment>
-    );
-  }
+    return <div className="App">
+      {this.state.page !== 'sidepanel' && <Header goToPage={this.goToPage} />}
+      {this.state.page === 'sidepanel' ? PAGES[this.state.page]({onSubmit: this.goToPage}) : PAGES[this.state.page]()}
+    </div>
+  };
 }
 
-export default App;
+export default widthAuth(App);
