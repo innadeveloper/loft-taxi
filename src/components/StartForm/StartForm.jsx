@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { widthAuth } from '../../components/AuthContext/AuthContext';
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { authenticate } from '../../store/actions/auth';
 
 const startPageData = {
     login: {

@@ -1,45 +1,32 @@
 import React from 'react';
 import './App.css';
 import SidePanel from './pages/SidePanel/SidePanel';
-import Header from './components/Header/Header';
+import HeaderWithConnect from './components/Header';
 import Map from './pages/Map/Map';
 import Profile from './pages/Profile/Profile';
-import { widthAuth } from './components/AuthContext/AuthContext';
 import PropTypes from "prop-types";
-
-const PAGES = {
-  'sidepanel': (props) => <SidePanel {...props} />,
-  'map': (props) => <Map {...props}/>,
-  'profile': (props) => <Profile {...props} />  
-}
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { connect } from 'react-redux';
 
 class App extends React.Component { 
   static propTypes = {
     isLoggedIn: PropTypes.bool
-  } 
-
-  state = { page: 'sidepanel'}
-
-  goToPage = (page) => {
-    console.log('App', this.props.isLoggedIn);
-
-    if (!this.props.isLoggedIn) {
-      this.setState( {page: 'sidepanel'} );
-      return
-    }
-    if (!page) {
-      this.setState( {page: 'map'} );
-      return
-    }
-    this.setState({ page });
-  };
+  }  
 
   render() {
-    return <div className="App">
-      {this.state.page !== 'sidepanel' && <Header goToPage={this.goToPage} />}
-      {this.state.page === 'sidepanel' ? PAGES[this.state.page]({onSubmit: this.goToPage}) : PAGES[this.state.page]()}
-    </div>
-  };
+    return (
+      <div className="App">
+        {this.props.isLoggedIn && <HeaderWithConnect />}
+        <Switch>
+          <Route
+            exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/map" /> : <SidePanel />} />
+            <PrivateRoute path="/map" component={ Map } />
+            <PrivateRoute path="/profile" component={ Profile } />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default widthAuth(App);
+export default connect((state) => ({ isLoggedIn: state.auth.isLoggedIn }))(App)
