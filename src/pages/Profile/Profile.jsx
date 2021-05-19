@@ -1,5 +1,13 @@
-const Profile = () => (
-<div className='page__title'>Profile page</div>
-)
+import React from 'react';
+import ProfileForm from '../../components/ProfileForm';
 
-export default Profile;
+export class Profile extends React.Component {
+  render() {
+    return (
+      <div>
+        <ProfileForm />
+      </div>
+    )
+  }
+}
+

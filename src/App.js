@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import SidePanel from './pages/SidePanel/SidePanel';
+import SidePanel from './pages/SidePanel';
 import HeaderWithConnect from './components/Header';
 import Map from './pages/Map/Map';
-import Profile from './pages/Profile/Profile';
+import Profile from './pages/Profile';
 import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
@@ -19,8 +19,7 @@ class App extends React.Component {
       <div className="App">
         {this.props.isLoggedIn && <HeaderWithConnect />}
         <Switch>
-          <Route
-            exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/map" /> : <SidePanel />} />
+          <Route exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/map" /> : <SidePanel />} />
             <PrivateRoute path="/map" component={ Map } />
             <PrivateRoute path="/profile" component={ Profile } />
         </Switch>
@@ -29,4 +28,6 @@ class App extends React.Component {
   }
 }
 
-export default connect((state) => ({ isLoggedIn: state.auth.isLoggedIn }))(App)
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn })
+)(App)

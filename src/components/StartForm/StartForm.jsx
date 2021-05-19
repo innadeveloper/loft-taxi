@@ -2,8 +2,6 @@ import React from 'react';
 import '../../styles/startform.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { widthAuth } from '../../components/AuthContext/AuthContext';
-import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { authenticate } from '../../store/actions/auth';
 
@@ -30,11 +28,8 @@ const startPageData = {
 }
 
 class StartForm extends React.Component {
-    static propTypes = {
-        logIn: PropTypes.func
-    }
 
-    state = { currentPopup: 'login', pressed: ""}
+    state = { currentPopup: 'login'}
 
     onChangeClick = (currentPopup) => {
         this.setState({ currentPopup })
@@ -43,11 +38,7 @@ class StartForm extends React.Component {
     submitHandle(evt) { 
         evt.preventDefault()
         const {email, password, name} = evt.target;
-        this.props.logIn(email.value, password.value, name.value);
-        const pressed = evt.target.name;
-        this.setState({ pressed }, function() {
-            this.setState({ result: this.props.onSubmit() });
-        });
+        this.props.authenticate(email.value, password.value, name.value);
     }
 
     render() {
@@ -104,4 +95,8 @@ class StartForm extends React.Component {
     }
 }
 
-export default widthAuth(StartForm);
+/* export default widthAuth(StartForm); */
+
+const mapDispatchToProps = {authenticate};
+const StartFormWithConnect = connect(null, mapDispatchToProps)(StartForm);
+export { StartFormWithConnect };

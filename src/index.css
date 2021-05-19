@@ -33,17 +33,51 @@ div.MuiToolbar-root.MuiToolbar-regular.header.MuiToolbar-gutters {
   padding-right: 150px;
 }
 
-header .header__button {
-  font-size: 20px;
-  font-weight: normal;
-  color: #fff;
-  margin-right: 16px;
-  text-transform: capitalize;
+button.MuiButtonBase-root.MuiButton-root.MuiButton-text.header__button {
+  padding: 0;
 }
 
-header .header__button:last-child {
-  margin-right: 0;
+header .header__button {
+  font-size: 21px;
+  font-weight: normal;
+  color: #fff;  
+  text-transform: capitalize;
+  cursor: pointer;
+  text-decoration: none;
 }
+
+.header__button:hover{
+  color:#FDBF5A;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header__menu-item {
+  margin-right: 35px;
+}
+
+.header__menu-item:last-child {
+  margin-right: 0;
+} 
+
+/* .nav__item-link {
+  text-decoration: none;
+  font-size: 21px;
+  color: #fff;
+  cursor: pointer;
+}
+ */
+
 
 /* map */
 .map-wrapper {

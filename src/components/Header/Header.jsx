@@ -16,7 +16,6 @@ class Header extends React.Component {
 
   headerLogout = () => {
     this.props.logOut();
-    /* this.props.goToPage('sidepanel'); */
   }
 
   render () {
@@ -26,14 +25,10 @@ class Header extends React.Component {
           <Toolbar className="header">
             <HeaderLogo />       
             <nav>
-              {/* <Button onClick = {()=> this.props.goToPage('map')} className='header__button'>Карта</Button>
-              <Button onClick = {()=> this.props.goToPage('profile')} className='header__button'>Профиль</Button>
-              <Button onClick = {this.headerLogout} className='header__button'> Выйти </Button> */}
               <ul className="header__menu">
                 <li className="header__menu-item"><Link to="/map" className='header__button'>Карта</Link></li>
                 <li className="header__menu-item"><Link to="/profile" className='header__button'>Профиль</Link></li>
-                <li className="header__menu-item"><Button onClick={this.headerLogout} className='header__button'>Выйти</Button>
-                </li>
+                <li className="header__menu-item"><Button onClick={this.headerLogout} className='header__button'>Выйти</Button></li>
               </ul>
             </nav>
           </Toolbar>
@@ -45,8 +40,8 @@ class Header extends React.Component {
 
 /* export default widthAuth(Header); */
 
-export const HeaderWithConnect = connect(
+const HeaderWithConnect = connect(
   null,
   { logOut }
 )(Header);
-
+export { HeaderWithConnect };
