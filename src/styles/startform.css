@@ -1,0 +1,65 @@
+.start-form {
+    width: 30%;
+    background: #fff;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 55px 115px;
+    margin: auto;
+}
+
+.start-form-title {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.forget-button {
+    background: none;
+    border: none;    
+    text-align: right;
+    color: #828282;
+    cursor: pointer;
+}
+
+.start-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.start-form form div {
+    margin-bottom: 10px;
+}
+
+.start-form form .main-btn {
+    margin-bottom: 20px;
+    margin-top: 46px;
+    padding: 10px 0 10px 0;
+    font-size: 25px;
+    color: #000000;
+}
+
+.regist-text {
+    font-size: 16px;
+    color: #828282;
+}
+
+.regist-link {
+    color: #FDBF5A;
+    cursor: pointer;
+}
+
+.start-form .main-btn {
+    margin-top: 20px;
+    background-color: #FDBF5A;
+    border-radius: 70px;
+}
+
+.start-form .main-btn:hover {
+    background-color: #FFA842;
+}
+
+.start-form .main-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+  
+  
