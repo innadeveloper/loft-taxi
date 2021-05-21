@@ -6,7 +6,9 @@ describe("auth", () => {
     it('returns isLoggedIn true', () => {
       expect(auth({}, logIn())).toEqual({
       "isLoggedIn": true,
-      "token": undefined});
+      "token": undefined,
+      "error": ""      
+      });
     });
   });
 
@@ -18,4 +20,9 @@ describe("auth", () => {
     });
   });
 
+  describe("#LOG_IN_ERROR", () => {
+    it('returns isLoggedIn false', () => {
+      expect(auth({}, logInError())).toEqual({isLoggedIn: false});
+    });
+  });
 });

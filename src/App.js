@@ -3,7 +3,7 @@ import './App.css';
 import SidePanel from './pages/SidePanel';
 import HeaderWithConnect from './components/Header';
 import Map from './pages/Map/Map';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile';
 import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';

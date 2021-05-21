@@ -70,15 +70,6 @@ ul {
   margin-right: 0;
 } 
 
-/* .nav__item-link {
-  text-decoration: none;
-  font-size: 21px;
-  color: #fff;
-  cursor: pointer;
-}
- */
-
-
 /* map */
 .map-wrapper {
   position: relative;
@@ -94,10 +85,3 @@ ul {
   right: 0;
 }
 
-/* profile */
-.page__title {
-  color: violet;
-  font-size: 30px;
-  font-weight: normal;
-  margin-top: 50px;
-}
