@@ -1,16 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/profileform.css';
 import Button from '@material-ui/core/Button';
 import logo from '../../img/icons/logo.png';
 import chip from '../../img/icons/chip.png'; 
 import card from '../../img/icons/card.png'; 
 import { connect } from 'react-redux'
-import { getCard } from '../../store/actions/card'
+import { getCard, changeCard } from '../../store/actions/card'
 
-const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
+const ProfileComponent = ({ token, cardData, error, isLoading, getCard, changeCard }) => {
   useEffect(() => {
     getCard(token);
   }, [token])
+
+  const [cardName, setCardName] = useState('')
+  const [cardNumber, setCardNumber] = useState('')
+  const [expiryDate, setExpiryDate] = useState('')
+  const [cvc, setCvc] = useState('')
+
+  useEffect(() => {
+    if (cardData.cardName) {
+      setCardName(cardData.cardName)
+    }
+    if (cardData.cardNumber) {
+      setCardNumber(cardData.cardNumber)
+    }
+    if (cardData.expiryDate) {
+      setExpiryDate(cardData.expiryDate)
+    }
+    if (cardData.cvc) {
+      setCvc(cardData.cvc)
+    }
+}, [cardData.cardName, cardData.cardNumber, cardData.expiryDate, cardData.cvc])
+
+  const handlePostCardData = (event) => {
+    event.preventDefault();
+    changeCard({ cardNumber, expiryDate, cardName, cvc, token })
+  }
 
   return (
     <>      
@@ -24,7 +49,7 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
               <div className='profileform__description'>Введите платежные данные</div>
             </div>
             <div className='profileform__content'>
-              <form className='profileform__form' id='card' >
+              <form className='profileform__form' id='card' onSubmit={handlePostCardData}>
                 <div className='input'>
                   <label className='input__label input__label--font-color--grey'>Имя владельца</label>
                   <input 
@@ -33,7 +58,8 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
                   type='text' 
                   label='Имя владельца' 
                   placeholder='Loft'                    
-                  value={cardData.cardName} 
+                  value={cardName} 
+                  onChange={e => setCardName(e.target.value)}        
                   />
                 </div>
                 <div className='input'>
@@ -44,7 +70,8 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
                   type='text' 
                   label='Номер карты' 
                   placeholder='5545 2300 3432 4521'                    
-                  value={cardData.cardNumber} 
+                  value={cardNumber}      
+                  onChange={e => setCardNumber(e.target.value)}
                   />
                 </div>
                 <div className='profileform__row'>
@@ -56,7 +83,9 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
                     type='text' 
                     label='MM/YY' 
                     placeholder='05/08'                     
-                    value={cardData.expiryDate} />
+                    value={expiryDate} 
+                    onChange={e => setExpiryDate(e.target.value)}
+                    />
                   </div>
                   <div className='input'>
                     <label className='input__label input__label--font-color--grey'>CVC</label>
@@ -66,7 +95,8 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
                     type='text' 
                     label='CVC' 
                     placeholder='667' 
-                    value={cardData.cvc} 
+                    value={cvc} 
+                    onChange={e => setCvc(e.target.value)}
                     />
                   </div>
                 </div>
@@ -75,9 +105,9 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
                 <div className='profileform__precheck-content'>
                   <div className='profileform__precheck-up-side'>
                     <img src={logo} alt='masterCard' className='card__masterCard' /> 
-                    <div className='profileform__precheck-date'>01/02</div>
+                    <div className='profileform__precheck-date'>{cardData.expiryDate}</div>
                   </div>
-                  <div className='profileform__precheck-card-number'>5545 2300 3432 4521</div>
+                  <div className='profileform__precheck-card-number'>{cardData.cardNumber}</div>
                   <div className='profileform__precheck-bottom-side'>
                     <img src={chip} alt='masterCard' className='card__masterCard' /> 
                     <img src={card} alt='masterCard' className='card__masterCard' />                
@@ -86,14 +116,14 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard }) => {
               </div>
             </div>
             <div className='profileform__button'>
-            <Button 
+              <Button 
                 className='button'  
                 type="submit" 
                 form='card'
                 variant="contained" 
                 color="primary" 
-                data-testid='form-submit'>Сохранить</Button>
-              {/* <button type='submit' className='button' form='card'>Сохранить</button> */}
+                data-testid='form-submit'>Сохранить
+              </Button>
             </div>
           </div>
         </div>         
@@ -109,7 +139,7 @@ const mapStateToProps = ({ card, auth }) => ({
   error: card.error
 })
 
-const mapDispatchToProps = { getCard }
+const mapDispatchToProps = { getCard, changeCard }
 
 export const ProfileForm = connect(mapStateToProps, mapDispatchToProps)(ProfileComponent)
 

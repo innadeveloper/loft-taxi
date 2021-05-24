@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logOut } from '../../store/actions/auth';
+import { logOutDeleteToken } from '../../store/actions/auth';
 
 class Header extends React.Component {
   static propTypes = {
@@ -15,7 +15,7 @@ class Header extends React.Component {
   }
 
   headerLogout = () => {
-    this.props.logOut();
+    this.props.logOutDeleteToken();
   }
 
   render () {
@@ -28,7 +28,7 @@ class Header extends React.Component {
               <ul className="header__menu">
                 <li className="header__menu-item"><Link to="/map" className='header__button'>Карта</Link></li>
                 <li className="header__menu-item"><Link to="/profile" className='header__button'>Профиль</Link></li>
-                <li className="header__menu-item"><Button onClick={this.headerLogout} className='header__button'>Выйти</Button></li>
+                <li className="header__menu-item"><Link to="/" onClick={this.headerLogout} className='header__button'>Выйти</Link></li>
               </ul>
             </nav>
           </Toolbar>
@@ -38,10 +38,8 @@ class Header extends React.Component {
   }
 }
 
-/* export default widthAuth(Header); */
-
 const HeaderWithConnect = connect(
   null,
-  { logOut }
+  { logOutDeleteToken }
 )(Header);
 export { HeaderWithConnect };

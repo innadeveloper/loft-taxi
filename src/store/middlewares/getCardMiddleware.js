@@ -1,7 +1,7 @@
 import { GET_CARD, getCardSuccess, getCardFailure } from '../actions/card';
 import {getCardDataFromServer} from '../api/GetCard';
 
-export const cardMiddleware = (store) => (next) => async (action) => {
+export const getCardMiddleware = (store) => (next) => async (action) => {
   if (action.type === GET_CARD) {
     const token = action.payload;
     const data = await getCardDataFromServer(token);

@@ -49,7 +49,8 @@ class StartForm extends React.Component {
         id="name" 
         name="name" 
         label="Как вас зовут"
-        placeholder="Петр Александрович"/> : '';
+        placeholder="Петр Александрович"
+        /> : '';
         const forgetPasswortLink = !nameField ? 
         <button 
         data-testid='form-name-input' 
@@ -59,15 +60,17 @@ class StartForm extends React.Component {
         return (
             <div className="start-form">
             <h2 className="start-form-title" data-testid='form-title'>{title}</h2>
+               {this.props.error && <h2 className="error-form" style={{color: 'red'}}>{this.props.error}</h2>}
             <form data-testid='start-form' noValidate autoComplete="off" onSubmit={(evt)=> this.submitHandle(evt)}>
                 <TextField 
                 id="email" 
                 name="email" 
-                label="Email*"
-                placeholder="mail@mail.ru" />
+                label="Email*" 
+                placeholder="mail@mail.ru"
+                />
                 {nameInput}
                 <TextField 
-                id="password"
+                id="password" 
                 type="password" 
                 name="password" 
                 label={passwordLabel}
@@ -81,13 +84,13 @@ class StartForm extends React.Component {
                 data-testid='form-submit'>{buttonText}</Button>
             </form>
             <p className="regist-text">
-                {registText} 
+                {registText } 
                 <span 
                    data-testid='form-change-button' 
                    className="regist-link" 
                    onClick={()=> this.onChangeClick(changePopup)}
                 >
-                    {registLink}
+                   {registLink}
                 </span>
             </p>
         </div>
@@ -95,8 +98,8 @@ class StartForm extends React.Component {
     }
 }
 
-/* export default widthAuth(StartForm); */
+export default connect(
+    (state) => ({isLoggedIn: state.auth.isLoggedIn, error: state.auth.error}),
+    { authenticate }
+  )(StartForm);
 
-const mapDispatchToProps = {authenticate};
-const StartFormWithConnect = connect(null, mapDispatchToProps)(StartForm);
-export { StartFormWithConnect };

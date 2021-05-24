@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/sidepanel.css';
-import StartFormWithConnect from '../../components/StartForm';
+import StartForm from '../../components/StartForm/StartForm';
 import StartLogo from '../../components/StartLogo/Startlogo';
 import PropTypes from "prop-types";
 
@@ -15,7 +15,7 @@ class SidePanel extends React.Component {
             <StartLogo />
           </section>
           <section className="reg-login-section">
-              { <StartFormWithConnect onSubmit={this.props.onSubmit} />}
+              { <StartForm onSubmit={this.props.onSubmit} />}
           </section>
         </div>
     };
