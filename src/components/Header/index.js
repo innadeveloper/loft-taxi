@@ -1,2 +1,2 @@
-import { Header } from './Header';
-export default Header;
+import { HeaderWithConnect } from './Header';
+export default HeaderWithConnect;
