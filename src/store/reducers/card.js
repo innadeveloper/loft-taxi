@@ -7,23 +7,23 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  switch (action.type) {
-    case GET_CARD: {
-      return { ...state, isLoadding: true };
-    }
-    case GET_CARD_SUCCESS: {
-      return { ...state, isLoadding: false, data: action.payload }
-    }
-    case GET_CARD_FAILURE: {
-      return { ...state, isLoadding: false, error: action.payload }
-    }
-    case CHANGE_CARD: {
-      return{...state, isLoading: true}
-  }
-  case CHANGE_CARD_SUCCESS: {
-      return{...state, isLoading: false, data: action.payload, error: ''}
-  }
-    default:
-      return state;
+  switch(action.type) {
+      case GET_CARD: {
+          return{...state, isLoading: true}
+      }
+      case GET_CARD_SUCCESS: {
+          return{...state, isLoading: false, data: action.payload, error: ''}
+      }
+      case GET_CARD_FAILURE: {
+          return{...state, isLoading: false, error: action.payload}
+      }
+      case CHANGE_CARD: {
+          return{...state, isLoading: true}
+      }
+      case CHANGE_CARD_SUCCESS: {
+          return{...state, isLoading: false, data: action.payload, error: ''}
+      }
+      default:
+          return state
   }
 }

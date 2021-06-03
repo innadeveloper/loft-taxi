@@ -2,11 +2,10 @@ import React from 'react';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logOutDeleteToken } from '../../store/actions/auth';
+import { logOut } from '../../store/actions/auth';
 
 class Header extends React.Component {
   static propTypes = {
@@ -15,7 +14,7 @@ class Header extends React.Component {
   }
 
   headerLogout = () => {
-    this.props.logOutDeleteToken();
+    this.props.logOut();
   }
 
   render () {
@@ -40,6 +39,6 @@ class Header extends React.Component {
 
 const HeaderWithConnect = connect(
   null,
-  { logOutDeleteToken }
+  { logOut }
 )(Header);
 export { HeaderWithConnect };
