@@ -1,42 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import SidePanel from './components/SidePanel';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import Header from './components/Header';
-import Map from './pages/Map';
-import Profile from './pages/Profile'; 
+import SidePanel from './pages/SidePanel';
+import HeaderWithConnect from './components/Header';
+import { MapWithAuth } from './pages/Map/Map';
+import Profile from './pages/Profile/Profile';
+import PropTypes from "prop-types";
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { connect } from 'react-redux';
 
-const pages = {
-  login: <SidePanel />,
-  signup: <SidePanel />,
-  map: <Map />,
-  profile: <Profile />  
-};
-
-class App extends React.Component {
-  constructor () {
-    super();
-    this.state = { page: 'login' };
-  }
-    
-  goToPage = (page) => {
-    this.setState({ page });
-  };
+class App extends React.Component { 
+  static propTypes = {
+    isLoggedIn: PropTypes.bool
+  }  
 
   render() {
     return (
-      <React.Fragment>
-        <main>
-          { pages[ this.state.page ] }
-          { this.state.page === 'login' ? <LogIn goToPage = { this.goToPage }/> : null }
-          { this.state.page === 'signup' ? <SignUp goToPage = { this.goToPage }/> : null }
-          { this.state.page === 'map' ? (<Header goToPage = { this.goToPage }/>) : null }
-          { this.state.page === 'profile' ? (<Header goToPage = { this.goToPage }/>) : null }          
-        </main>
-      </React.Fragment>
+      <div className="App">
+        {this.props.isLoggedIn && <HeaderWithConnect />}
+        <Switch>
+          <Route exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/profile" /> : <SidePanel />} />
+            <PrivateRoute path="/map" component={ MapWithAuth } />
+            <PrivateRoute path="/profile" component={ Profile } />
+        </Switch>
+      </div>
     );
   }
 }
 
-export default App;
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn })
+)(App)
