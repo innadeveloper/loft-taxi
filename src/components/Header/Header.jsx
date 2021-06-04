@@ -9,12 +9,7 @@ import { logOut } from '../../store/actions/auth';
 
 class Header extends React.Component {
   static propTypes = {
-    logOut: PropTypes.func, 
-    goToPage: PropTypes.func     
-  }
-
-  headerLogout = () => {
-    this.props.logOut();
+    logOut: PropTypes.func
   }
 
   render () {
@@ -27,7 +22,7 @@ class Header extends React.Component {
               <ul className="header__menu">
                 <li className="header__menu-item"><Link to="/map" className='header__button'>Карта</Link></li>
                 <li className="header__menu-item"><Link to="/profile" className='header__button'>Профиль</Link></li>
-                <li className="header__menu-item"><Link to="/" onClick={this.headerLogout} className='header__button'>Выйти</Link></li>
+                <li className="header__menu-item"><Link to="/" onClick={this.props.logOut} className='header__button'>Выйти</Link></li>
               </ul>
             </nav>
           </Toolbar>

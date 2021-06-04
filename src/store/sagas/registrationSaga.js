@@ -1,20 +1,20 @@
-/* import { takeEvery, call, put } from 'redux-saga/effects';
-import { REGISTRATE, signIn, signInError } from '../actions/registration';
-import { signUp } from '../api/signUp';
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { REGISTER, registerSuccess, registerFailure } from '../actions/registration';
 
-export function* regWatcher() {
-  yield takeEvery(REGISTRATE, registrationSaga)
+import { serverRegister } from '../api/registration';
+
+export function* registerWatcher () {
+  yield takeEvery(REGISTER, registerSaga)
 }
 
-function* registrationSaga(action) {
+export function* registerSaga(action) {
   const {email, password, name, surname} = action.payload;
-  const data = yield call(signUp, email, password, name, surname);
-  if (data.success) {
-    localStorage.setItem('token', data.token);
-    yield put(signIn(data.token));
+  const data = yield call(serverRegister, email, password, name, surname);
+  if(data.success) {
+      localStorage.setItem('token', data.token)
+      yield put(registerSuccess(data.token))
   } else {
-    yield put(signInError(data.error));
+      yield put(registerFailure(data.error))
   }
 }
-
- */
+ 

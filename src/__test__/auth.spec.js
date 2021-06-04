@@ -1,5 +1,5 @@
-import auth from './auth'
-import {logIn, logOut, logInError} from '../actions/auth'
+import auth from '../store/reducers/auth'
+import { logIn, logOut, logInError } from '../store/actions/auth'
 
 describe("auth", () => {
   describe("#LOG_IN", () => {

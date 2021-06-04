@@ -17,6 +17,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "formik": "^2.2.8",
     "formik-material-ui": "^3.0.1",
+    "history": "^5.0.0",
     "inputmask": "^5.0.5",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.2.0",

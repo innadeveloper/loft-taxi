@@ -66,7 +66,7 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard, changeCa
               <form className='profileform__form' id='card' onSubmit={handleSubmit(handlePostCardData)}>
                 <div className='input'>
                   <label htmlFor='cardName' className='input__label input__label--font-color--grey'>Имя владельца*</label>
-                 {errors.cardName && errors.cardName.type == 'required' && <span className='verified'>Поле обязательно для заполнения</span> }                 
+                 {errors.cardName && <span className='verified'>Поле обязательно для заполнения</span> }                 
                   <input  
                   id='cardName'                  
                   {...register('cardName', {
@@ -82,7 +82,7 @@ const ProfileComponent = ({ token, cardData, error, isLoading, getCard, changeCa
                 </div>
                 <div className='input'>
                   <label htmlFor='cardNumber' className='input__label input__label--font-color--grey'>Номер карты*</label>
-                  {errors.cardNumber && errors.cardNumber.type == 'required' && <span className='verified'>Поле обязательно для заполнения</span> }             
+                  {errors.cardNumber && <span className='verified'>Поле обязательно для заполнения</span> }             
                   <input 
                    id='cardNumber'                  
                   {...register('cardNumber', {

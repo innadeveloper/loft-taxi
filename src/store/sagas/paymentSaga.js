@@ -10,7 +10,7 @@ export function* getCardWatcher() {
     yield takeEvery(GET_CARD, loadCardSaga);
 }
 
-function* loadCardSaga(action) {
+export function* loadCardSaga(action) {
   const token = action.payload;
   const data = yield call(getCardDataFromServer, token);
 
@@ -25,7 +25,7 @@ export function* saveCardWatcher() {
   yield takeEvery(CHANGE_CARD, updateCardSaga);
 }
 
-function* updateCardSaga(action) {
+export function* updateCardSaga(action) {
   const { cardNumber, expiryDate, cardName, cvc, token } = action.payload;
   const data = yield call(changeCardDataToServer, ({cardNumber, expiryDate, cardName, cvc, token}))
 

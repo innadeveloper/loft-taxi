@@ -43,7 +43,16 @@ class StartForm extends React.Component {
 
     render() {
         const currentForm = this.state.currentPopup === "login" ? startPageData.login : startPageData.registration;
-        const {nameField, buttonText, title, registText, registLink, passwordLabel, changePopup} = currentForm;
+        const {
+            nameField,
+            buttonText, 
+            title, 
+            registText, 
+            registLink, 
+            passwordLabel, 
+            changePopup
+        } = currentForm;
+        
         const nameInput = nameField ? 
         <TextField 
         id="name" 

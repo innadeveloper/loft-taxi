@@ -19,7 +19,7 @@ class App extends React.Component {
       <div className="App">
         {this.props.isLoggedIn && <HeaderWithConnect />}
         <Switch>
-          <Route exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/map" /> : <SidePanel />} />
+          <Route exact path="/" render={() => this.props.isLoggedIn ? <Redirect to="/profile" /> : <SidePanel />} />
             <PrivateRoute path="/map" component={ MapWithAuth } />
             <PrivateRoute path="/profile" component={ Profile } />
         </Switch>

@@ -10,7 +10,7 @@ export function* authWatcher() {
   yield takeEvery(AUTHENTICATE, authenticateSaga)
 }
 
-function* authenticateSaga(action) {
+export function* authenticateSaga(action) {
     const {email, password} = action.payload;
     const data = yield call(serverLogIn, email, password);
     

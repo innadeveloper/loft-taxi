@@ -10,7 +10,7 @@ export function* addressWatcher() {
   yield takeEvery(GET_ADDRESS, getAddressSaga)
 }
 
-function* getAddressSaga() {
+export function* getAddressSaga() {
   const data = yield call(getAddressFromServer);
   
   if (data.addresses) {
