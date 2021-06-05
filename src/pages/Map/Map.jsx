@@ -12,14 +12,15 @@ import { getCard } from '../../store/actions/card';
 import { GoToProfile } from '../../components/OrderForm/OrderForm';
 
 const Map = ({ 
-    cardData, 
+    cardData, getCard, token,
     addresses, getAddress, 
     getRoute, route 
 }) => {
     
     useEffect(() => {
+        getCard(token);
         getAddress();
-    }, [])
+    }, [token])
 
     const [cardProfile, setCardData] = useState({})  
     const [orderForm, setOrderForm] = useState(true)  
